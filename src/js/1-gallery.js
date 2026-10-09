@@ -72,7 +72,7 @@ const createGalleryItemMarkup = ({ preview, original, description }) => {
             <a class="gallery-link" href="${original}">
               <img class="gallery-image"
                   src="${preview}"
-                  alt="Image description" />
+                  alt="${description}" />
             </a>
           </li>`;
 };
@@ -83,20 +83,9 @@ const galleryItemsMarkup = images.map(createGalleryItemMarkup).join('');
 
 gallery.insertAdjacentHTML('beforeend', galleryItemsMarkup);
 
-gallery.addEventListener('click', event => {
-  event.preventDefault();
-
-  if (!event.target.classList.contains('gallery-image')) {
-    return;
-  }
-
-  const largeImageUrl = event.target.dataset.source;
-  const imageDescription = event.target.alt;
-
-  var lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
+var lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
 });

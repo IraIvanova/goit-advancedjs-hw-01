@@ -29,11 +29,11 @@ function loadInitialData() {
 function onFormInput(event) {
   const formEl = event.target;
 
-  if ((!formEl.name) in formData) {
+  if (!(formEl.name in formData)) {
     return;
   }
 
-  formData[formEl.name] = formEl.value;
+  formData[formEl.name] = formEl.value.trim();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
@@ -41,14 +41,14 @@ function onFormSubmit(event) {
   event.preventDefault();
 
   if (Object.values(formData).some(value => value === '')) {
-    alert("Email and Message fields can't be empty!");
+    alert('Fill please all fields');
   } else {
     console.log(formData);
 
     formData.email = '';
     formData.message = '';
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    localStorage.removeItem(STORAGE_KEY);
 
     feedbackForm.reset();
   }
